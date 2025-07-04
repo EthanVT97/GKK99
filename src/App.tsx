@@ -20,6 +20,14 @@ function App() {
     }
   };
 
+  const handleGKK99Click = () => {
+    window.open('https://www.gkk99.com/', '_blank');
+  };
+
+  const handleGKK777Click = () => {
+    window.open('https://7777gkkk.info/', '_blank');
+  };
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -112,8 +120,32 @@ function App() {
             မြန်မာ AI ချတ်ဘော့ဝန်ဆောင်မှု
           </p>
           
+          <div className="bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-yellow-400/30">
+            <div className="space-y-2 text-lg font-myanmar">
+              <p className="text-yellow-400">💸 စလော့ဂိမ်းအစုံ - 20 Ks</p>
+              <p className="text-green-400">✅ ဖရီးစပင် - 1000 Ks</p>
+              <p className="text-blue-400">💰 ဂိမ်းနိုင်ချေ - 96.5%</p>
+            </div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <button 
+              onClick={handleGKK99Click}
+              className="bg-gradient-to-r from-green-400 to-green-500 text-black px-8 py-4 rounded-full text-lg font-bold hover:from-green-500 hover:to-green-600 transform hover:scale-105 transition-all duration-300 shadow-2xl flex items-center space-x-2"
+            >
+              <span className="font-myanmar">GKK99 ဖရီး 30,000 Ks ရယူရန်</span>
+            </button>
+            
+            <button 
+              onClick={handleGKK777Click}
+              className="bg-gradient-to-r from-purple-400 to-purple-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:from-purple-500 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-2xl flex items-center space-x-2"
+            >
+              <span className="font-myanmar">GKK777 အခမဲ့ 30,000 Ks ရယူရန်</span>
+            </button>
+          </div>
+          
           <p className="text-lg mb-8 text-gray-300 max-w-2xl mx-auto font-myanmar">
-            ၂၄ နာရီ အချိန်မရွေး သင့်အတွက် အဖြေများ ပေးနိုင်သော ဉာဏ်ရည်တုံ့ပြန်မှု စနစ်
+            စာရင်းသွင်းပြီး အခမဲ့ဘောနပ် နှစ်ကြိမ်ရယူလိုက်ပါ❣️❣️
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -258,6 +290,21 @@ function App() {
             <p className="text-xl mb-8 text-gray-200 font-myanmar">
               GKK99 AI ချတ်ဘော့နှင့် အတူ သင့်အတွေ့အကြုံကို မြှင့်တင်လိုက်ပါ
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+              <button 
+                onClick={handleGKK99Click}
+                className="bg-gradient-to-r from-green-400 to-green-500 text-black px-8 py-4 rounded-full text-lg font-bold hover:from-green-500 hover:to-green-600 transform hover:scale-105 transition-all duration-300 shadow-2xl"
+              >
+                <span className="font-myanmar">GKK99 ဖရီး 30,000 Ks</span>
+              </button>
+              
+              <button 
+                onClick={handleGKK777Click}
+                className="bg-gradient-to-r from-purple-400 to-purple-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:from-purple-500 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-2xl"
+              >
+                <span className="font-myanmar">GKK777 အခမဲ့ 30,000 Ks</span>
+              </button>
+            </div>
             <button 
               onClick={handleViberClick}
               className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-12 py-4 rounded-full text-xl font-bold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-2xl btn-primary"
