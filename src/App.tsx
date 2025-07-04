@@ -1,15 +1,19 @@
-import { useEffect } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import { AdminLogin } from './components/AdminLogin';
+import { AdminDashboard } from './components/AdminDashboard';
+import { LoadingSpinner } from './components/LoadingSpinner';
 import './App.css';
 
-function App() {
+// Landing Page Component
+const LandingPage: React.FC = () => {
   const handleViberClick = () => {
-    // Enhanced Viber link handling with fallback
     const viberUrl = 'viber://pa?chatURI=chatbotnhantri';
     const fallbackUrl = 'https://www.viber.com/download/';
     
     try {
       window.open(viberUrl, '_blank');
-      // Fallback for devices without Viber
       setTimeout(() => {
         if (confirm('Viber မရှိပါက Viber ကို ဒေါင်းလုဒ်လုပ်မလား?')) {
           window.open(fallbackUrl, '_blank');
@@ -35,11 +39,9 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    // Remove loading class after component mounts
+  React.useEffect(() => {
     document.body.classList.remove('loading');
     
-    // Add scroll event listener for header background
     const handleScroll = () => {
       const header = document.querySelector('header');
       if (header) {
@@ -342,6 +344,42 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+};
+
+// Protected Route Component
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <LoadingSpinner size="lg" />
+      </div>
+    );
+  }
+
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+};
+
+// Main App Component
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<AdminLogin />} />
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          } 
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 
