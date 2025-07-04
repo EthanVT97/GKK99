@@ -104,7 +104,7 @@ function App() {
       {/* Hero Section */}
       <section className="relative z-10 px-6 py-32 min-h-screen flex items-center">
         <div className="max-w-4xl mx-auto text-center">
-          <diချတ်ဘော့ဝန်ဆောင်မှုnimate-float">
+          <div className="animate-float">
             <img 
               src="/99.png" 
               alt="GKK99 Main Logo" 
