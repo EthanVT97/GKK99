@@ -1,4 +1,10 @@
-import { User, LoginCredentials, AuthResponse, ContentData, ApiResponse } from '../types';
+import {
+  User,
+  LoginCredentials,
+  AuthResponse,
+  ContentData,
+  ApiResponse
+} from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.gkk99.com';
 
@@ -6,7 +12,21 @@ class ApiService {
   private token: string | null = null;
 
   constructor() {
-    this.token = localStorage.getItem('admin_token');
+    if (typeof window !== 'undefined') {
+      this.token = localStorage.getItem('admin_token');
+    }
+  }
+
+  // Type-safe token setter
+  public setToken(token: string | null) {
+    this.token = token;
+    if (typeof window !== 'undefined') {
+      if (token) {
+        localStorage.setItem('admin_token', token);
+      } else {
+        localStorage.removeItem('admin_token');
+      }
+    }
   }
 
   private async request<T>(
@@ -15,13 +35,14 @@ class ApiService {
   ): Promise<ApiResponse<T>> {
     try {
       const url = `${API_BASE_URL}${endpoint}`;
-      const headers: HeadersInit = {
+
+      const headers: Record<string, string> = {
         'Content-Type': 'application/json',
-        ...options.headers,
+        ...(options.headers as Record<string, string>),
       };
 
       if (this.token) {
-        headers.Authorization = `Bearer ${this.token}`;
+        headers['Authorization'] = `Bearer ${this.token}`;
       }
 
       const response = await fetch(url, {
@@ -39,12 +60,13 @@ class ApiService {
       console.error('API request failed:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
 
-  // Authentication
+  // ===== Auth =====
+
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     try {
       const response = await this.request<AuthResponse>('/auth/login', {
@@ -53,16 +75,17 @@ class ApiService {
       });
 
       if (response.success && response.data?.token) {
-        this.token = response.data.token;
-        localStorage.setItem('admin_token', this.token);
-        localStorage.setItem('admin_user', JSON.stringify(response.data.user));
+        this.setToken(response.data.token);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('admin_user', JSON.stringify(response.data.user));
+        }
       }
 
       return response.data || response;
     } catch (error) {
       return {
         success: false,
-        message: 'Login failed. Please try again.'
+        message: 'Login failed. Please try again.',
       };
     }
   }
@@ -75,9 +98,10 @@ class ApiService {
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
-      this.token = null;
-      localStorage.removeItem('admin_token');
-      localStorage.removeItem('admin_user');
+      this.setToken(null);
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('admin_user');
+      }
     }
   }
 
@@ -85,7 +109,8 @@ class ApiService {
     return this.request<User>('/auth/verify');
   }
 
-  // User Management
+  // ===== Users =====
+
   async getUsers(): Promise<ApiResponse<User[]>> {
     return this.request<User[]>('/admin/users');
   }
@@ -104,7 +129,8 @@ class ApiService {
     });
   }
 
-  // Content Management
+  // ===== Content =====
+
   async getContent(): Promise<ApiResponse<ContentData>> {
     return this.request<ContentData>('/content');
   }
@@ -116,7 +142,8 @@ class ApiService {
     });
   }
 
-  // Analytics
+  // ===== Analytics =====
+
   async getAnalytics(): Promise<ApiResponse<any>> {
     return this.request<any>('/analytics');
   }
