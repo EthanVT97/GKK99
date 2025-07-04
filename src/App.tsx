@@ -104,7 +104,7 @@ function App() {
       {/* Hero Section */}
       <section className="relative z-10 px-6 py-32 min-h-screen flex items-center">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="animate-float">
+          <div className="mb-8 animate-float">
             <img 
               src="/99.png" 
               alt="GKK99 Main Logo" 
@@ -179,47 +179,41 @@ function App() {
             ကျွန်ုပ်တို့၏ ဝန်ဆောင်မှုများ
           </h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 feature-card">
-              <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 feature-card text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2 font-myanmar">၂၄/၇ ဝန်ဆောင်မှု</h3>
-              <p className="text-gray-300 font-myanmar">အချိန်မရွေး အဖြေများ ရယူနိုင်ပါသည်</p>
+              <h3 className="text-2xl font-semibold mb-4 text-green-400 font-myanmar">GKK99 ဖရီး 30,000 Ks</h3>
+              <p className="text-gray-300 font-myanmar mb-6">
+                အခမဲ့ ဘောနပ်ငွေ ရယူပြီး ဂိမ်းများ စတင်လိုက်ပါ
+              </p>
+              <button 
+                onClick={handleGKK99Click}
+                className="bg-gradient-to-r from-green-400 to-green-500 text-black px-8 py-3 rounded-full font-bold hover:from-green-500 hover:to-green-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                ယခုပင် ရယူရန်
+              </button>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 feature-card">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 feature-card text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2 font-myanmar">လျင်မြန်သော တုံ့ပြန်မှု</h3>
-              <p className="text-gray-300 font-myanmar">ချက်ချင်း အဖြေများ ရရှိနိုင်ပါသည်</p>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 feature-card">
-              <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-500 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.01-4.65.51-6.81-1.66-2.39-4.95-2.87-7.34-1.21-2.39 1.66-2.87 4.95-1.21 7.34 1.5 2.16 4.21 2.43 6.15.69l.03-.03L10.93 15l1.94-1.93zM8.5 12C7.12 12 6 10.88 6 9.5S7.12 7 8.5 7 11 8.12 11 9.5 9.88 12 8.5 12z"/>
-                  <path d="m13 17.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5z"/>
-                  <path d="m20.5 19.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5z"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2 font-myanmar">မြန်မာဘာသာ</h3>
-              <p className="text-gray-300 font-myanmar">သင့်ဘာသာစကားဖြင့် စကားပြောနိုင်ပါသည်</p>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 transform hover:scale-105 feature-card">
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2 font-myanmar">လုံခြုံမှု</h3>
-              <p className="text-gray-300 font-myanmar">သင့်အချက်အလက်များ လုံခြုံစွာ ကာကွယ်ထားပါသည်</p>
+              <h3 className="text-2xl font-semibold mb-4 text-purple-400 font-myanmar">GKK777 အခမဲ့ 30,000 Ks</h3>
+              <p className="text-gray-300 font-myanmar mb-6">
+                အထူး ဘောနပ်ငွေဖြင့် ပိုမို ကြီးမားသော အနိုင်များ ရယူပါ
+              </p>
+              <button 
+                onClick={handleGKK777Click}
+                className="bg-gradient-to-r from-purple-400 to-purple-500 text-white px-8 py-3 rounded-full font-bold hover:from-purple-500 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-lg"
+              >
+                ယခုပင် ရယူရန်
+              </button>
             </div>
           </div>
         </div>
