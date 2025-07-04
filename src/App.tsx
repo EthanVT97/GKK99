@@ -104,7 +104,7 @@ function App() {
       {/* Hero Section */}
       <section className="relative z-10 px-6 py-32 min-h-screen flex items-center">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8 animate-float">
+          <diချတ်ဘော့ဝန်ဆောင်မှုnimate-float">
             <img 
               src="/99.png" 
               alt="GKK99 Main Logo" 
@@ -117,7 +117,7 @@ function App() {
           </h1>
           
           <p className="text-xl md:text-2xl mb-4 text-gray-200 font-myanmar">
-            မြန်မာ AI ချတ်ဘော့ဝန်ဆောင်မှု
+            GKK99 ဝန်ဆောင်မှု
           </p>
           
           <div className="bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-yellow-400/30">
