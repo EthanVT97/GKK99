@@ -6,8 +6,143 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { LoadingSpinner } from './components/LoadingSpinner';
 import './App.css';
 
-// Landing Page Component
+// Simple Landing Page Component (fallback)
+const SimpleLandingPage: React.FC = () => {
+  const handleViberClick = () => {
+    try {
+      const viberUrl = 'viber://pa?chatURI=chatbotnhantri';
+      window.open(viberUrl, '_blank');
+    } catch (error) {
+      console.error('Viber link error:', error);
+      window.open('https://www.viber.com/download/', '_blank');
+    }
+  };
+
+  const handleGKK99Click = () => {
+    window.open('https://www.gkk99.com/', '_blank');
+  };
+
+  const handleGKK777Click = () => {
+    window.open('https://7777gkkk.info/', '_blank');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white">
+      {/* Header */}
+      <header className="px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+              <span className="text-black font-bold text-xl">99</span>
+            </div>
+          </div>
+          
+          <button 
+            onClick={handleViberClick}
+            className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-6 py-2 rounded-full font-semibold hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300"
+          >
+            စတင်ရန်
+          </button>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="px-6 py-32 min-h-screen flex items-center">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-8">
+            <div className="w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-8">
+              <span className="text-black font-bold text-4xl">99</span>
+            </div>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
+            GKK99
+          </h1>
+          
+          <p className="text-xl md:text-2xl mb-4 text-gray-200 font-myanmar">
+            GKK99 ဝန်ဆောင်မှု
+          </p>
+          
+          <div className="bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-yellow-400/30">
+            <div className="space-y-2 text-lg font-myanmar">
+              <p className="text-yellow-400">💸 စလော့ဂိမ်းအစုံ - 20 Ks</p>
+              <p className="text-green-400">✅ ဖရီးစပင် - 1000 Ks</p>
+              <p className="text-blue-400">💰 ဂိမ်းနိုင်ချေ - 96.5%</p>
+            </div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <button 
+              onClick={handleGKK99Click}
+              className="bg-gradient-to-r from-green-400 to-green-500 text-black px-8 py-4 rounded-full text-lg font-bold hover:from-green-500 hover:to-green-600 transform hover:scale-105 transition-all duration-300 shadow-2xl"
+            >
+              <span className="font-myanmar">GKK99 ဖရီး 30,000 Ks ရယူရန်</span>
+            </button>
+            
+            <button 
+              onClick={handleGKK777Click}
+              className="bg-gradient-to-r from-purple-400 to-purple-500 text-white px-8 py-4 rounded-full text-lg font-bold hover:from-purple-500 hover:to-purple-600 transform hover:scale-105 transition-all duration-300 shadow-2xl"
+            >
+              <span className="font-myanmar">GKK777 အခမဲ့ 30,000 Ks ရယူရန်</span>
+            </button>
+          </div>
+          
+          <p className="text-lg mb-8 text-gray-300 max-w-2xl mx-auto font-myanmar">
+            စာရင်းသွင်းပြီး အခမဲ့ဘောနပ် နှစ်ကြိမ်ရယူလိုက်ပါ❣️❣️
+          </p>
+          
+          <button 
+            onClick={handleViberClick}
+            className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-12 py-4 rounded-full text-xl font-bold hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition-all duration-300 shadow-2xl"
+          >
+            <span className="font-myanmar">Viber တွင် ချက်ချင်း စတင်ရန်</span>
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-6 py-12 border-t border-white/10">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-gray-400 font-myanmar">
+            Copyright by GKK99 • ဒီဇိုင်းနှင့် ဖွံ့ဖြိုးတိုးတက်မှု
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+// Landing Page Component with error handling
 const LandingPage: React.FC = () => {
+  const [hasError, setHasError] = React.useState(false);
+
+  React.useEffect(() => {
+    try {
+      document.body.classList.remove('loading');
+      
+      const handleScroll = () => {
+        const header = document.querySelector('header');
+        if (header) {
+          if (window.scrollY > 100) {
+            header.classList.add('bg-black/20', 'backdrop-blur-md');
+          } else {
+            header.classList.remove('bg-black/20', 'backdrop-blur-md');
+          }
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    } catch (error) {
+      console.error('Landing page effect error:', error);
+      setHasError(true);
+    }
+  }, []);
+
+  if (hasError) {
+    return <SimpleLandingPage />;
+  }
+
   const handleViberClick = () => {
     const viberUrl = 'viber://pa?chatURI=chatbotnhantri';
     const fallbackUrl = 'https://www.viber.com/download/';
@@ -39,24 +174,6 @@ const LandingPage: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
-    document.body.classList.remove('loading');
-    
-    const handleScroll = () => {
-      const header = document.querySelector('header');
-      if (header) {
-        if (window.scrollY > 100) {
-          header.classList.add('bg-black/20', 'backdrop-blur-md');
-        } else {
-          header.classList.remove('bg-black/20', 'backdrop-blur-md');
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden">
       {/* Animated Background Elements */}
@@ -72,11 +189,9 @@ const LandingPage: React.FC = () => {
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <img 
-              src="/99.png" 
-              alt="GKK99 Logo" 
-              className="h-12 w-auto"
-            />
+            <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+              <span className="text-black font-bold text-xl">99</span>
+            </div>
           </div>
           
           <nav className="hidden md:flex items-center space-x-6">
@@ -107,11 +222,9 @@ const LandingPage: React.FC = () => {
       <section className="relative z-10 px-6 py-32 min-h-screen flex items-center">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8 animate-float">
-            <img 
-              src="/99.png" 
-              alt="GKK99 Main Logo" 
-              className="mx-auto h-32 w-auto mb-8"
-            />
+            <div className="w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-8">
+              <span className="text-black font-bold text-4xl">99</span>
+            </div>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent animate-pulse-glow">
@@ -262,11 +375,9 @@ const LandingPage: React.FC = () => {
             </div>
             
             <div className="text-center">
-              <img 
-                src="/99.png" 
-                alt="GKK99 About" 
-                className="mx-auto h-48 w-auto mb-6 animate-float"
-              />
+              <div className="w-48 h-48 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 animate-float">
+                <span className="text-black font-bold text-6xl">99</span>
+              </div>
               <p className="text-gray-300 font-myanmar text-lg">
                 GKK99 သည် မြန်မာနိုင်ငံတွင် ပထမဆုံး AI ချတ်ဘော့ ဝန်ဆောင်မှု ဖြစ်ပြီး၊ 
                 သင့်အတွက် အကောင်းဆုံး အဖြေများကို ပေးဆောင်နိုင်ရန် ရည်ရွယ်ပါသည်။
@@ -319,11 +430,9 @@ const LandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <img 
-                src="/99.png" 
-                alt="GKK99 Logo" 
-                className="h-12 w-auto"
-              />
+              <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
+                <span className="text-black font-bold text-xl">99</span>
+              </div>
             </div>
             
             <div className="text-center md:text-right">
@@ -362,25 +471,56 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
-// Main App Component
+// Main App Component with error boundary
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<AdminLogin />} />
-        <Route 
-          path="/dashboard" 
-          element={
-            <ProtectedRoute>
-              <AdminDashboard />
-            </ProtectedRoute>
-          } 
-        />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
-  );
+  const [hasError, setHasError] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleError = (error: ErrorEvent) => {
+      console.error('Global error:', error);
+      setHasError(true);
+    };
+
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      console.error('Unhandled promise rejection:', event.reason);
+      setHasError(true);
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
+  }, []);
+
+  if (hasError) {
+    return <SimpleLandingPage />;
+  }
+
+  try {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<AdminLogin />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    );
+  } catch (error) {
+    console.error('App render error:', error);
+    return <SimpleLandingPage />;
+  }
 }
 
 export default App;
