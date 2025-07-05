@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './App.css'
+import { BrowserRouter } from 'react-router-dom' // ✅ Add this
 
 // Error boundary component
 class ErrorBoundary extends React.Component<
@@ -24,8 +25,8 @@ class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ 
-          padding: '20px', 
+        <div style={{
+          padding: '20px',
           textAlign: 'center',
           fontFamily: 'Arial, sans-serif',
           backgroundColor: '#f5f5f5',
@@ -41,7 +42,7 @@ class ErrorBoundary extends React.Component<
           <p style={{ color: '#666', marginBottom: '20px' }}>
             Application ကို load လုပ်ရာတွင် ပြဿနာရှိနေပါသည်။
           </p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             style={{
               padding: '10px 20px',
@@ -59,9 +60,9 @@ class ErrorBoundary extends React.Component<
               <summary style={{ cursor: 'pointer', color: '#666' }}>
                 Technical Details
               </summary>
-              <pre style={{ 
-                backgroundColor: '#f8f8f8', 
-                padding: '10px', 
+              <pre style={{
+                backgroundColor: '#f8f8f8',
+                padding: '10px',
                 borderRadius: '5px',
                 fontSize: '12px',
                 overflow: 'auto',
@@ -95,9 +96,11 @@ if (!rootElement) {
     const root = ReactDOM.createRoot(rootElement)
     root.render(
       <React.StrictMode>
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
+        <BrowserRouter> {/* ✅ Required for routing */}
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </BrowserRouter>
       </React.StrictMode>
     )
   } catch (error) {
