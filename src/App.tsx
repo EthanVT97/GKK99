@@ -32,9 +32,19 @@ const SimpleLandingPage: React.FC = () => {
       <header className="px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
-              <span className="text-black font-bold text-xl">99</span>
-            </div>
+            <img 
+              src="/99.png" 
+              alt="GKK99 Logo" 
+              className="h-12 w-auto"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.className = 'w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center';
+                fallback.innerHTML = '<span class="text-black font-bold text-xl">99</span>';
+                target.parentNode?.appendChild(fallback);
+              }}
+            />
           </div>
           
           <button 
@@ -50,9 +60,19 @@ const SimpleLandingPage: React.FC = () => {
       <section className="px-6 py-32 min-h-screen flex items-center">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
-            <div className="w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-8">
-              <span className="text-black font-bold text-4xl">99</span>
-            </div>
+            <img 
+              src="/99.png" 
+              alt="GKK99 Main Logo" 
+              className="mx-auto h-32 w-auto mb-8"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.className = 'w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-8';
+                fallback.innerHTML = '<span class="text-black font-bold text-4xl">99</span>';
+                target.parentNode?.appendChild(fallback);
+              }}
+            />
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
@@ -115,6 +135,7 @@ const SimpleLandingPage: React.FC = () => {
 // Landing Page Component with error handling
 const LandingPage: React.FC = () => {
   const [hasError, setHasError] = React.useState(false);
+  const [imageError, setImageError] = React.useState(false);
 
   React.useEffect(() => {
     try {
@@ -174,6 +195,28 @@ const LandingPage: React.FC = () => {
     }
   };
 
+  const LogoImage: React.FC<{ className: string; alt: string }> = ({ className, alt }) => {
+    return (
+      <img 
+        src="/99.png" 
+        alt={alt}
+        className={className}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          if (!imageError) {
+            setImageError(true);
+            target.style.display = 'none';
+            const fallback = document.createElement('div');
+            fallback.className = className.replace('h-12 w-auto', 'w-12 h-12').replace('h-32 w-auto', 'w-32 h-32').replace('h-48 w-auto', 'w-48 h-48') + ' bg-yellow-400 rounded-full flex items-center justify-center';
+            const size = className.includes('h-12') ? 'text-xl' : className.includes('h-32') ? 'text-4xl' : 'text-6xl';
+            fallback.innerHTML = `<span class="text-black font-bold ${size}">99</span>`;
+            target.parentNode?.appendChild(fallback);
+          }
+        }}
+      />
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden">
       {/* Animated Background Elements */}
@@ -189,9 +232,7 @@ const LandingPage: React.FC = () => {
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
-              <span className="text-black font-bold text-xl">99</span>
-            </div>
+            <LogoImage className="h-12 w-auto" alt="GKK99 Logo" />
           </div>
           
           <nav className="hidden md:flex items-center space-x-6">
@@ -222,9 +263,7 @@ const LandingPage: React.FC = () => {
       <section className="relative z-10 px-6 py-32 min-h-screen flex items-center">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8 animate-float">
-            <div className="w-32 h-32 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-8">
-              <span className="text-black font-bold text-4xl">99</span>
-            </div>
+            <LogoImage className="mx-auto h-32 w-auto mb-8" alt="GKK99 Main Logo" />
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent animate-pulse-glow">
@@ -375,9 +414,7 @@ const LandingPage: React.FC = () => {
             </div>
             
             <div className="text-center">
-              <div className="w-48 h-48 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 animate-float">
-                <span className="text-black font-bold text-6xl">99</span>
-              </div>
+              <LogoImage className="mx-auto h-48 w-auto mb-6 animate-float" alt="GKK99 About" />
               <p className="text-gray-300 font-myanmar text-lg">
                 GKK99 သည် မြန်မာနိုင်ငံတွင် ပထမဆုံး AI ချတ်ဘော့ ဝန်ဆောင်မှု ဖြစ်ပြီး၊ 
                 သင့်အတွက် အကောင်းဆုံး အဖြေများကို ပေးဆောင်နိုင်ရန် ရည်ရွယ်ပါသည်။
@@ -430,9 +467,7 @@ const LandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center">
-                <span className="text-black font-bold text-xl">99</span>
-              </div>
+              <LogoImage className="h-12 w-auto" alt="GKK99 Logo" />
             </div>
             
             <div className="text-center md:text-right">

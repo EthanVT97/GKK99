@@ -106,7 +106,19 @@ export const AdminDashboard: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <img src="/99.png" alt="GKK99" className="h-10 w-auto" />
+              <img 
+                src="/99.png" 
+                alt="GKK99" 
+                className="h-10 w-auto"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = document.createElement('div');
+                  fallback.className = 'w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center';
+                  fallback.innerHTML = '<span class="text-black font-bold text-sm">99</span>';
+                  target.parentNode?.appendChild(fallback);
+                }}
+              />
               <div>
                 <h1 className="text-xl font-bold text-white font-myanmar">
                   GKK99 စီမံခန့်ခွဲမှု
