@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './App.css'
-import { BrowserRouter } from 'react-router-dom' // ✅ Add this
+import { BrowserRouter } from 'react-router-dom'
 
-// Error boundary component
+// Error Boundary Component
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; error?: Error }
@@ -80,39 +80,20 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Check if root element exists
+// Get root and render
 const rootElement = document.getElementById('root')
 
-if (!rootElement) {
-  console.error('Root element not found!')
-  document.body.innerHTML = `
-    <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
-      <h1 style="color: red;">Root element မတွေ့ရှိပါ</h1>
-      <p>HTML file တွင် id="root" ရှိသော element လိုအပ်ပါသည်။</p>
-    </div>
-  `
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
+      </BrowserRouter>
+    </React.StrictMode>
+  )
 } else {
-  try {
-    const root = ReactDOM.createRoot(rootElement)
-    root.render(
-      <React.StrictMode>
-        <BrowserRouter> {/* ✅ Required for routing */}
-          <ErrorBoundary>
-            <App />
-          </ErrorBoundary>
-        </BrowserRouter>
-      </React.StrictMode>
-    )
-  } catch (error) {
-    console.error('Failed to render app:', error)
-    rootElement.innerHTML = `
-      <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
-        <h1 style="color: red;">Application စတင်ရာတွင် ပြဿနာရှိနေပါသည်</h1>
-        <p>Console ကို စစ်ဆေးပြီး error details များကို ကြည့်ပါ။</p>
-        <button onclick="window.location.reload()" style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
-          ပြန်လည်စတင်ရန်
-        </button>
-      </div>
-    `
-  }
+  console.error('Root element not found!')
 }
